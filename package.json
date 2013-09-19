@@ -1,0 +1,30 @@
+{
+  "name": "firmata-parser",
+  "version": "0.0.1",
+  "description": "A Firmata parser event emitter",
+  "main": "firmata-parser.js",
+  "scripts": {
+    "test": "./node_modules/.bin/nodeunit test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/reconbot/firmata-parser.git"
+  },
+  "keywords": [
+    "firmata",
+    "serial",
+    "midi"
+  ],
+  "author": "Francis Gulotta <wizard@roborooter.com>",
+  "license": "public domain",
+  "bugs": {
+    "url": "https://github.com/reconbot/firmata-parser/issues"
+  },
+  "devDependencies": {
+    "nodeunit": "~0.8.1",
+    "sinon": "~1.7.3"
+  },
+  "dependencies": {
+    "midi-parser": "~0.1.0"
+  }
+}
