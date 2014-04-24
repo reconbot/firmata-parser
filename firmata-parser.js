@@ -1,17 +1,19 @@
-var util = require("util");
 var events = require('events');
 var Parser = require('midi-parser');
+var colors = require('colors');
 
-var FirmataParser = module.exports = function () {
+var FirmataParser = module.exports = function (opt) {
   if (!(this instanceof FirmataParser)) {
-    return new FirmataParser();
+    return new FirmataParser(opt);
   }
+  opt = opt || {};
   events.EventEmitter.call(this);
+  this.debug = opt.debug;
   this.parser = new Parser();
   this.bindEvents();
 };
 
-util.inherits(FirmataParser, events.EventEmitter);
+FirmataParser.prototype = Object.create(events.EventEmitter.prototype);
 
 var msg = FirmataParser.msg = {
   firmwareVersionMajor: 0,
@@ -46,6 +48,27 @@ var callbacks = {};
 
 FirmataParser.prototype.write = function (data) {
   this.parser.write(data);
+};
+
+FirmataParser.prototype.emit = function () {
+  var args = [].slice.call(arguments);
+  this.log(args.shift(), args);
+  events.EventEmitter.prototype.emit.apply(this, arguments);
+};
+
+FirmataParser.prototype.log = function(func, args){
+  if (!this.debug) { return; }
+  args = [].slice.call(args);
+  console.log(
+      // Timestamp
+      String(+new Date()).grey,
+      // color matches the info type from J5
+      "FirmataParser".magenta,
+      // which function?
+      func.cyan,
+      // What was it called with?
+      args.join(", ")
+  );
 };
 
 FirmataParser.prototype.bindEvents = function (data) {
