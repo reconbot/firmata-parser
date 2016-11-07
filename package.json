@@ -21,11 +21,11 @@
     "url": "https://github.com/reconbot/firmata-parser/issues"
   },
   "devDependencies": {
-    "nodeunit": "~0.8.1",
-    "sinon": "~1.7.3"
+    "nodeunit": "~0.10.2",
+    "sinon": "~1.17.6"
   },
   "dependencies": {
     "midi-parser": "~0.1.0",
-    "colors": "~0.6.2"
+    "colors": "~1.1.2"
   }
 }
